@@ -1,8 +1,6 @@
 import websockets
 
-async def send_data(event, relay):
-
+async def send_data(data: str, relay: str) -> str:
     async with websockets.connect(relay) as websocket:
-        message = f'{event}'
-        await websocket.send(message)
+        await websocket.send(data)
         return await websocket.recv()

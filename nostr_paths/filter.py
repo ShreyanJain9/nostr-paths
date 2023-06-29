@@ -3,7 +3,7 @@ from pynostr.key import PublicKey
 import urllib.parse
 import random
 
-def uri_to_request(uri: str):
+def uri_to_request(uri: str) -> str:
     # Extracting the path from the URL string
     path = urllib.parse.urlparse(uri).path
     # Extracting the public key from the path

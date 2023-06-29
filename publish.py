@@ -13,7 +13,7 @@ add_path(event, path)
 event.sign(private_key.hex())
 
 
-asyncio.get_event_loop().run_until_complete(send_data(event, "wss://relay.damus.io"))
+asyncio.get_event_loop().run_until_complete(send_data(f'{event}', "wss://relay.damus.io"))
 
 nostr_uri = f"nostr://{public_key.bech32()}{path}"
 
