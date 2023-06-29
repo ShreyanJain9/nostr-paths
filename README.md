@@ -27,7 +27,7 @@ Each event consists of the following attributes:
 ## Querying the Relay
 To retrieve events from the relay using their path, you can use the following query format:
 ```json
-["REQ", <subscription_id>, {“#u”: <event_path>, “authors”: <event_creator_pubkey>}]
+["REQ", <subscription_id>, {“#u”: [<event_path>], “authors”: [<event_creator_pubkey>]}]
 ```
 By specifying the **path** and **pubkey** in the query, you can request the relay to provide relevant events. The relay will return all events that match the given path and belong to the specified pubkey.
 
@@ -41,5 +41,24 @@ By giving Nostr events paths, we get:
 To interact with the relays using Nostr Paths, clients can convert a path like `nostr:npubsomething/some/event` into a request to the relays:
 
 ```json
-["REQ", “<subscription_id>”, {”#u": "/some/event/", "authors": "<hex version of npubsomething>”}]
+["REQ", “<subscription_id>”, {”#u": ["/some/event/"], "authors": ["<hex version of npubsomething>”]}]
 ```
+
+(should it be something other than nostr:// since that uri scheme is already designed to use noteids?)
+
+## Demo
+
+This repository contains a minimal working Python-based demonstration of two things: creating an event with the "u" tag and retrieving it from a relay based on its theoretical nostr:// URI.
+
+To try it out, install all the requirements using pip, and then run
+```sh
+python3 publish.py
+```
+and enter the note content and then the path you want it at. The script will use a randomly-generated keypair for now, and returns a URI like:
+`nostr://npub1lhmf0kpdcfa0p8vfcwhwkjfyp8dawkkesh7c8qj7cwfw083wj4asje928h/hello/world`
+
+To view your event, you can then take the URI and run
+```sh
+python3 get_uri.py
+```
+and enter the nostr:// uri. It will then return the JSON contents of your note!

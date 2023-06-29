@@ -1,0 +1,2 @@
+pynostr==0.6.2
+websockets==11.0.3
